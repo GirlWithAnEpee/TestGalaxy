@@ -1,17 +1,25 @@
 <?php
-declare(strict_types = 1);
-spl_autoload_register(function ($class_name) {
-    include $class_name . '.php';
-    throw new Exception("Невозможно загрузить $class_name.");
-});
 
+//Класс Парк
 class Park
 {
-    private $vehicles = array();
-    private int $vmest = 0;
+    private $vehicles = array(); //массив ТС
+    private int $vmest = 0; //вместительность парка
 
-    public function addVehicle(Vehicle $v): boolean {
-        if (count($this->vehicles)<$vmest){
+    //присвоение значений полям класса
+    public function __set($property, $value)
+    {
+        try {
+            $this->$property = $value;
+        }
+        catch (Exception $e) {
+            echo 'Исключение: ',  $e->getMessage(), "\n";
+        }
+    }
+
+    //добавить ТС в парк
+    public function addVehicle(Vehicle $v): bool {
+        if (count($this->vehicles)<$this->vmest){
             $this->vehicles[]=$v;
             return true;
         }
@@ -20,37 +28,39 @@ class Park
         }           
     }
 
-    public function getExpensive(): Vehicle {
+    //получить самое дорогое ТС
+    public function getExpensive() {
         $mostExp = $this->vehicles[0];
-        for ($i=1; $i<count($this->vehicles); $i++)
+        foreach ($this->vehicles as $value)
         {
-            if ($this->vehicles[i]->getPrice()>$this->vehicles[0]->getPrice())
-                $mostExp = $this->vehicles[i];
+            if ($value->getPrice()>$mostExp->getPrice())
+                $mostExp = $value;
         }
         return $mostExp;
-        /*echo "The most expensive vehicle:";
-        echo $mostExp->getInfo();*/
     }
 
-    public function getSumCost(): float {
+    //получить суммарную стоимость ТС
+    public function getSumCost(): int {
         $sum = 0;
-        for ($i=0; i<count($this->vehicles); $i++)
+        foreach ($this->vehicles as $value)
         {
-            $sum += $this->vehicles[i]->getPrice();
+            $sum += $value->getPrice();
         }
         return $sum;
     }
 
+    //получить список авто в парке
     public function getAllCars(): array {
         $cars = array();
-        for ($i=0; i<count($this->vehicles); $i++)
+        foreach ($this->vehicles as $value)
         {
-            if (get_class($this->vehicles[i])=="Car")
-                $cars[]=$this->vehicles[i];
+            if (get_class($value)=="Car")
+                $cars[]=$value;
         }
         return $cars;
     }
 
+    //получить среднюю стоимость ТС
     public function getMidCost(): float {
         
         $midCost = $this->getSumCost()/count($this->vehicles);

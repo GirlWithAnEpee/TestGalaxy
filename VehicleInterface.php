@@ -1,7 +1,7 @@
 <?php
 
 interface VehicleInterface {
-    /* Общие методы */
+    //общие методы для всех классов-наследников
     public function getModel();
     public function getPrice();
     public function getSpeed();

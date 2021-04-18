@@ -1,20 +1,18 @@
 <?php
-declare(strict_types = 1);
-spl_autoload_register(function ($class_name) {
-    include $class_name . '.php';
-    throw new Exception("Невозможно загрузить $class_name.");
-});
 
-class Helicopter extends Vehicle implements VehicleInterface
+//Класс Вертолёт
+class Helicopter extends Vehicle
 {
-    function __construct() {
-        parent::__construct();
+    //конструктор с параметрами
+    function __construct($m, $p, $s) {
+        parent::__construct($m, $p, $s);
         print "Был создан объект класса Helicopter\n";
     }
 
+    //вывод инфы
     public function getInfo() {
-        echo ("Helicopter:$this->getModel(), $this->getSpeed() km/h, 
-        $$this->getPrice()");
+        echo "Helicopter: ", $this->getModel(), ", ", $this->getSpeed(), "km/h, ", 
+        "$", $this->getPrice(), "\n";
     }
 }
 ?>

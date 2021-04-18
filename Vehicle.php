@@ -1,11 +1,14 @@
 <?php
 declare(strict_types = 1);
-abstract class Vehicle
-{
-    private string $model = "Транспортное средство";
-    private float $price = 0;
-    private int $speed = 0;
 
+//Абстрактный класс Транспортное Средство
+abstract class Vehicle implements VehicleInterface
+{
+    private string $model = "Транспортное средство";//модель
+    private float $price = 0;//цена
+    private int $speed = 0;//скорость
+
+    //конструктор с параметрами
     function __construct(string $m, float $p, int $s) {
         $this->price=$p;
         $this->model=$m;

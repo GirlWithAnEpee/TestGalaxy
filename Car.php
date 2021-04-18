@@ -1,20 +1,19 @@
 <?php
 declare(strict_types = 1);
-spl_autoload_register(function ($class_name) {
-    include $class_name . '.php';
-    throw new Exception("Невозможно загрузить $class_name.");
-});
 
-class Car extends Vehicle implements VehicleInterface
+//Класс Машина
+class Car extends Vehicle
 {
-    function __construct() {
-        parent::__construct();
+    //конструктор с параметрами
+    function __construct($m, $p, $s) {
+        parent::__construct($m, $p, $s);
         print "Был создан объект класса Car\n";
     }
 
+    //вывод инфы
     public function getInfo() {
-        echo ("Car:$this->getModel(), $this->getSpeed() km/h, 
-        $$this->getPrice()");
+        echo "Car: ", $this->getModel(), ", ", $this->getSpeed(), "km/h, ", 
+        "$", $this->getPrice(), "\n";
     }
 }
 ?>
