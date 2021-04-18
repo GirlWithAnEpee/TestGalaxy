@@ -7,8 +7,8 @@ spl_autoload_register(function ($class_name) {
 
 class Park
 {
-    public $vehicles = array();
-    public int $vmest = 0;
+    private $vehicles = array();
+    private int $vmest = 0;
 
     public function addVehicle(Vehicle $v): boolean {
         if (count($this->vehicles)<$vmest){
@@ -16,7 +16,6 @@ class Park
             return true;
         }
         else {
-            echo "The park is full!";
             return false;
         }           
     }
@@ -50,9 +49,6 @@ class Park
                 $cars[]=$this->vehicles[i];
         }
         return $cars;
-        /*echo "The list of cars:";
-        for ($i=0; i<count($cars); $i++)
-            echo $cars[i]->getInfo();*/
     }
 
     public function getMidCost(): float {
