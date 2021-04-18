@@ -1,12 +1,21 @@
 <?php
+
+interface VehicleInterface {
+    /* Общие методы */
+    public function getModel();
+    public function getPrice();
+    public function getSpeed();
+    public function getInfo();
+}
+
 abstract class Vehicle
 {
-    $model = "";
-    $price = 0;
-    $speed = 0;
+    public $model = "Транспортное средство";
+    public $price = 0;
+    public $speed = 0;
 
-   /* метод для определения в дочерних классах */
-    abstract protected function getInfo();
+   /* метод для определения в дочерних классах 
+    abstract public function getInfo();*/
 
    /* Общие методы */
     public function getModel() {
@@ -20,27 +29,27 @@ abstract class Vehicle
     }
 }
 
-class Car extends Vehicle
+class Car extends Vehicle implements VehicleInterface
 {
     public function getInfo() {
-        echo ("Car:$this->getModel(), $this->getSpeed km/h, 
-        $$this->getPrice");
+        echo ("Car:$this->getModel(), $this->getSpeed() km/h, 
+        $$this->getPrice()");
     }
 }
 
-class Motorbike extends Vehicle
+class Motorbike extends Vehicle implements VehicleInterface
 {
     public function getInfo() {
-        echo ("Motorbike:$this->getModel(), $this->getSpeed km/h, 
-        $$this->getPrice");
+        echo ("Motorbike:$this->getModel(), $this->getSpeed() km/h, 
+        $$this->getPrice()");
     }
 }
 
-class Helicopter extends Vehicle
+class Helicopter extends Vehicle implements VehicleInterface
 {
-    public function getValue() {
-        echo ("Helicopter:$this->getModel(), $this->getSpeed km/h, 
-        $$this->getPrice");
+    public function getInfo() {
+        echo ("Helicopter:$this->getModel(), $this->getSpeed() km/h, 
+        $$this->getPrice()");
     }
 }
 
