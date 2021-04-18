@@ -1,10 +1,16 @@
 <?php
+declare(strict_types = 1);
+spl_autoload_register(function ($class_name) {
+    include $class_name . '.php';
+    throw new Exception("Невозможно загрузить $class_name.");
+});
+
 class Park
 {
     public $vehicles = array();
-    public $vmest = 0;
+    public int $vmest = 0;
 
-    public function addVehicle(Vehicle $v){
+    public function addVehicle(Vehicle $v): boolean {
         if (count($this->vehicles)<$vmest){
             $this->vehicles[]=$v;
             return true;
@@ -15,9 +21,9 @@ class Park
         }           
     }
 
-    public function getExpensive(){
+    public function getExpensive(): Vehicle {
         $mostExp = $this->vehicles[0];
-        for ($i=1; i<count($this->vehicles); $i++)
+        for ($i=1; $i<count($this->vehicles); $i++)
         {
             if ($this->vehicles[i]->getPrice()>$this->vehicles[0]->getPrice())
                 $mostExp = $this->vehicles[i];
@@ -27,7 +33,7 @@ class Park
         echo $mostExp->getInfo();*/
     }
 
-    public function getSumCost(){
+    public function getSumCost(): float {
         $sum = 0;
         for ($i=0; i<count($this->vehicles); $i++)
         {
@@ -36,7 +42,7 @@ class Park
         return $sum;
     }
 
-    public function getAllCars(){
+    public function getAllCars(): array {
         $cars = array();
         for ($i=0; i<count($this->vehicles); $i++)
         {
@@ -49,7 +55,7 @@ class Park
             echo $cars[i]->getInfo();*/
     }
 
-    public function getMidCost(){
+    public function getMidCost(): float {
         
         $midCost = $this->getSumCost()/count($this->vehicles);
         return $midCost;

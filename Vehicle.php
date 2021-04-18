@@ -1,22 +1,23 @@
 <?php
+declare(strict_types = 1);
 abstract class Vehicle
 {
-    public $model = "Транспортное средство";
-    public $price = 0;
-    public $speed = 0;
+    public string $model = "Транспортное средство";
+    public float $price = 0;
+    public int $speed = 0;
 
    /* метод для определения в дочерних классах 
     abstract public function getInfo();*/
 
    /* Общие методы */
     public function getModel() {
-        print $this->model;
+        return $this->model;
     }
         public function getPrice() {
-        print $this->price;
+        return $this->price;
     }
         public function getSpeed() {
-        print $this->speed;
+        return $this->speed;
     }
 }
 ?>
