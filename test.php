@@ -7,8 +7,7 @@ function __autoload( $className ) {
 }
 
 //создаём парк, инициализируем вместимость
-$park = new Park();
-$park->vmest = 5;
+$park = new Park(5);
 
 //начинаем наполнять парк: создаём объект с помощью конструктора с параметрами,
 //выводим про него инфу, добавляем его в парк и проверяем, успешно ли
@@ -66,8 +65,8 @@ echo "Общая стоимость всех ТС парка: $", $sum, "\n";
 //ищем все авто в парке
 $cars = $park->getAllCars();
 echo "Список автомобилей в парке:\n";
-foreach ($cars as $value)
-    echo $value->getInfo();
+foreach ($cars as $car)
+    echo $car->getInfo();
 
 //ищем среднюю стоимость ТС
 $mid = $park->getMidCost();

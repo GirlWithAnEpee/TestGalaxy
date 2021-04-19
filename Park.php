@@ -4,7 +4,12 @@
 class Park
 {
     private $vehicles = array(); //массив ТС
-    private int $vmest = 0; //вместительность парка
+    private int $capacity = 0; //вместительность парка
+
+    //конструктор с параметрами
+    function __construct(int $capacity) {
+        $this->capacity=$capacity;
+    }
 
     //присвоение значений полям класса
     public function __set($property, $value)
@@ -19,7 +24,7 @@ class Park
 
     //добавить ТС в парк
     public function addVehicle(Vehicle $v): bool {
-        if (count($this->vehicles)<$this->vmest){
+        if (count($this->vehicles)<$this->capacity){
             $this->vehicles[]=$v;
             return true;
         }
@@ -29,22 +34,22 @@ class Park
     }
 
     //получить самое дорогое ТС
-    public function getExpensive() {
+    public function getExpensive(): Vehicle {
         $mostExp = $this->vehicles[0];
-        foreach ($this->vehicles as $value)
+        foreach ($this->vehicles as $vehicle)
         {
-            if ($value->getPrice()>$mostExp->getPrice())
-                $mostExp = $value;
+            if ($vehicle->getPrice()>$mostExp->getPrice())
+                $mostExp = $vehicle;
         }
         return $mostExp;
     }
 
     //получить суммарную стоимость ТС
-    public function getSumCost(): int {
+    public function getSumCost(): float {
         $sum = 0;
-        foreach ($this->vehicles as $value)
+        foreach ($this->vehicles as $vehicle)
         {
-            $sum += $value->getPrice();
+            $sum += $vehicle->getPrice();
         }
         return $sum;
     }
@@ -52,10 +57,10 @@ class Park
     //получить список авто в парке
     public function getAllCars(): array {
         $cars = array();
-        foreach ($this->vehicles as $value)
+        foreach ($this->vehicles as $vehicle)
         {
-            if (get_class($value)=="Car")
-                $cars[]=$value;
+            if (get_class($vehicle)=="Car")
+                $cars[]=$vehicle;
         }
         return $cars;
     }

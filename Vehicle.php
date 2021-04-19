@@ -9,10 +9,10 @@ abstract class Vehicle implements VehicleInterface
     private int $speed = 0;//скорость
 
     //конструктор с параметрами
-    function __construct(string $m, float $p, int $s) {
-        $this->price=$p;
-        $this->model=$m;
-        $this->speed=$s;
+    function __construct(string $model, float $price, int $speed) {
+        $this->price=$price;
+        $this->model=$model;
+        $this->speed=$speed;
     }
 
     public function getModel() {
@@ -25,9 +25,15 @@ abstract class Vehicle implements VehicleInterface
         return $this->speed;
     }
 
+    //присвоение значений полям класса
     public function __set($property, $value)
-	{
-		$this->$property = $value;
-	}
+    {
+        try {
+            $this->$property = $value;
+        }
+        catch (Exception $e) {
+            echo 'Исключение: ',  $e->getMessage(), "\n";
+        }
+    }
 }
 ?>
